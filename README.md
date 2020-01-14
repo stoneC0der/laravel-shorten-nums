@@ -24,12 +24,26 @@ use Stonec0der\ShortenNumsFacade
 ...
 $value = '12894090';
 // Shorten
-$shortened = ShortenNumsFacade::shorten($value);
+$shortened = ShortenNumsFacade::shortenNumber($value);
 
 // Output will
-12.8M.
+// 12.8M.
 ```
+The shortenNumber accept an option parameter length which is the length of value passed.
+```php
+$length = 4 // => from 1000 to 9999
 
+$shortened = ShortenNumsFacade::shortenNumber($value, $length='4');
+```
+If you know in advance the length of the value, let's you expect the value to be between 1,000,000 & 9,999,999.
+You can directly call a method associated with less than 10 million and greater than 999,999
+```php
+$value = '8500000';
+$shortened = ShortenNumsFacade::shortenMillion($value);
+// Output
+// 8.5M
+```
+In most case you will want to use ```ShortenNumsFacade::ShortenNumer($number, $length=null);```
 ### Testing
 
 ``` bash
