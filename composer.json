@@ -1,0 +1,54 @@
+{
+    "name": "stonec0der/shorten-nums",
+    "description": "Shorten some numbers to this notation 1000 => 1K.",
+    "keywords": [
+        "stonec0der",
+        "shorten-nums"
+    ],
+    "homepage": "https://github.com/stonec0der/shorten-nums",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Cedric Megnie",
+            "email": "stonec0dersoft@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "5.8.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stonec0der\\ShortenNums\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stonec0der\\ShortenNums\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stonec0der\\ShortenNums\\ShortenNumsServiceProvider"
+            ],
+            "aliases": {
+                "ShortenNums": "Stonec0der\\ShortenNums\\ShortenNumsFacade"
+            }
+        }
+    }
+}
