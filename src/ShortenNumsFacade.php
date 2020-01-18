@@ -16,7 +16,6 @@ namespace Stonec0der\ShortenNums;
 
 use Illuminate\Support\Facades\Facade;
 
-
 /**
  * @see \Stonec0der\ShortenNums\Skeleton\SkeletonClass
  */
@@ -32,62 +31,29 @@ class ShortenNumsFacade extends Facade
         return 'shorten-nums';
     }
 
-    public static function shortenNumber($number, $length = null)
+    public static function readableNumber($number, $precision = 1)
     {
-    	echo $number;
-    	if (!is_null($length)) {
-    		$shortened = ShortenNums::shortenNumber($number, $length);
-    	}
-    	$shortened = ShortenNums::shortenNumber($number);
+        return ShortenNums::formatNumber($number, $precision);       
+    }
+
+    public static function readableThousand($number, $precision = 1)
+    {
+    	return ShortenNums::formatThousand($number, $precision);
+    }
+
+    public static function readableMillion($number, $precision = 1)
+    {
+        return ShortenNums::formatMillion($number, $precision);
+    }
+
+    public static function readableBillion($number, $precision = 1)
+    {
+        $shortened = ShortenNums::formatBillion($number, $precision);
         return $shortened;
     }
 
-    public static function shortenThousand($number)
+    public static function readableTrillion($number, $precision = 1)
     {
-    	$shortened = ShortenNums::shortenThousand($number);
-
-        return $shortened;
-    }
-
-    public static function shortenTenThousand($number)
-    {
-        $shortened = ShortenNums::shortenTenThousand($number);
-
-        return $shortened;
-    }
-
-    public static function shortenHandredThousand($number)
-    {
-        $shortened = ShortenNums::shortenHandredThousand($number);
-
-        return $shortened;
-    }
-
-    public static function shortenMillion($number)
-    {
-        $shortened = ShortenNums::shortenMillion($number);
-
-        return $shortened;
-    }
-
-    public static function shortenTenMillion($number)
-    {
-        $shortened = ShortenNums::shortenTenMillion($number);
-
-        return $shortened;
-    }
-
-    public static function shortenHandredMillion($number)
-    {
-        $shortened = ShortenNums::shortenHandredMillion($number);
-
-        return $shortened;
-    }
-
-    public static function shortenBillion($number)
-    {
-        $shortened = ShortenNums::shortenBillion($number);
-
-        return $shortened;
+        return ShortenNums::formatTrillion($number, $precision);
     }
 }
