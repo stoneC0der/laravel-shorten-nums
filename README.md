@@ -64,7 +64,6 @@ If you discover any security related issues, please email stonec0dersoft@gmail.c
 
 ## Credits
 
-- [Cedric Megnie](https://github.com/stonec0der)
 - [All Contributors](../../contributors)
 
 ## License
