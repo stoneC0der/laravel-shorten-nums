@@ -1,11 +1,8 @@
 # Shorten Numbers
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/stonec0der/shorten-nums.svg?style=flat-square)](https://packagist.org/packages/stonec0der/shorten-nums)
-
 [![Build Status](https://img.shields.io/travis/stonec0der/laravel-shorten-nums/master.svg?style=flat-square)](https://travis-ci.org/stoneC0der/laravel-shorten-nums)
-
 [![Quality Score](https://img.shields.io/scrutinizer/g/stoneC0der/laravel-shorten-nums.svg?style=flat-square)](https://scrutinizer-ci.com/g/stoneC0der/laravel-shorten-nums)
-
 [![Total Downloads](https://img.shields.io/packagist/dt/stonec0der/shorten-nums.svg?style=flat-square)](https://packagist.org/packages/stonec0der/shorten-nums)
 
 This is simple package to convert 12894090 views to 12.9M views. I wrote this as I need this functionality and did not want to use a library, i am sure there is a much better one out there but if you want something simple feel free to use.
