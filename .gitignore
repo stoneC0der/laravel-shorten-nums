@@ -3,3 +3,6 @@ composer.lock
 docs
 vendor
 coverage
+.scruntinizer.yml
+.styleci.yml
+.editorconfig
