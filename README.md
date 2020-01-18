@@ -19,7 +19,7 @@ git clone https://github.com/stoneC0der/laravel-shorten-nums.git
 Or via composer:
 
 ```bash
-composer require stonec0der/laravel-shorten-nums
+composer require stonec0der/shorten-nums
 ```
 
 ## Usage
