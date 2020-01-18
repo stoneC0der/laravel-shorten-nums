@@ -5,15 +5,19 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/stonec0der/shorten-nums.svg?style=flat-square)](https://scrutinizer-ci.com/g/stonec0der/shorten-nums)
 [![Total Downloads](https://img.shields.io/packagist/dt/stonec0der/shorten-nums.svg?style=flat-square)](https://packagist.org/packages/stonec0der/shorten-nums)
 
-This is simple package to convert 12894090 views to 12.8M views. I wrote this as I need this functionality and did not want to use a library, i am sure there is a much better one out there but if you want something simple feel free to use.
+This is simple package to convert 12894090 views to 12.9M views. I wrote this as I need this functionality and did not want to use a library, i am sure there is a much better one out there but if you want something simple feel free to use.
 
 ## Installation
-
-You can install the package via composer:
-
+You can clone this repo
 ```bash
-composer require stonec0der/shorten-nums
+git clone https://github.com/stoneC0der/laravel-shorten-nums.git
 ```
+
+[//]: # (Or via composer:)
+
+[//]: # (```bash)
+[//]: # (composer require stonec0der/laravel-shorten-nums)
+[//]: # (```)
 
 ## Usage
 
@@ -24,26 +28,34 @@ use Stonec0der\ShortenNumsFacade
 ...
 $value = '12894090';
 // Shorten
-$shortened = ShortenNumsFacade::shortenNumber($value);
+$formated_number = ShortenNumsFacade::readableNumber($value);
 
 // Output will
-// 12.8M.
+// 12.9M.
 ```
 The shortenNumber accept an option parameter length which is the length of value passed.
 ```php
-$length = 4 // => from 1000 to 9999
+/* 
+Default
+This enable you to return for 1240 => 1.2K with default precisionn
+and 1.24 with $precision set to 2 and so on.
+*/
+$value = '1240';
+$precision = 1;
 
-$shortened = ShortenNumsFacade::shortenNumber($value, $length='4');
-```
-If you know in advance the length of the value, let's you expect the value to be between 1,000,000 & 9,999,999.
-You can directly call a method associated with less than 10 million and greater than 999,999
-```php
-$value = '8500000';
-$shortened = ShortenNumsFacade::shortenMillion($value);
+$formated_number = ShortenNumsFacade::readableNumber($value, $precision=2);
 // Output
-// 8.5M
+// 1.24K
 ```
-In most case you will want to use ```ShortenNumsFacade::ShortenNumer($number, $length=null);```
+If you know in advance the length of the value, let's you expect the value to be between 999,999 & 999,999,999.
+You can directly call a method associated with Millions
+```php
+$value = '8525000';
+$formated_number = ShortenNumsFacade::readableMillion($value, 2);
+// Output
+// 8.53M
+```
+In most case you will want to use ```ShortenNumsFacade::readableNumer($number);```
 ### Testing
 
 ``` bash
