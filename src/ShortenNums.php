@@ -176,33 +176,33 @@ class ShortenNums
 	 * @param  string $value the invalid number
 	 * @return string
 	 */
-	private static function notSupported($number): string
+	private static function notSupported($value): string
 	{
-	    return 'Sorry ' . $number . ' is not Supported!';
+	    return 'Sorry ' . $value . ' is not Supported!';
 	}
 
 	/**
 	 * [validateNumber description]
-	 * @param  [type] $value [description]
+	 * @param string $value [description]
 	 * @return [type]         [description]
 	 */
-	private static function validateNumber($number)
+	private static function validateNumber($value)
 	{
 		// Tis temporary enforce that the pass value should be pass as string of an integer instead non quoted integer example: '1000' is valid, 1000 is not.
-		if (!is_string($number))
-			throw new \Exception("TypeError: $number should be pass as quoted string to avoid unespected result.", 1);
+		if (!is_string($value))
+			throw new \Exception("TypeError: $value should be pass as quoted string to avoid unespected result.", 1);
 		// Accept only integers and string with valid integers.
-    	if (!is_int((int)$number))
-    		throw new \Exception("TypeError: $number is not a valid integer", 1);
+    	if (!is_int((int)$value))
+    		throw new \Exception("TypeError: $value is not a valid integer", 1);
     	// Should not start with 0. Also check the number length
-    	if (!preg_match('/((?!(0))^[\d]+)$/i', (string)$number))
-    		throw new \Exception("Error: $number is not valid, value should not start with 0", 1);
+    	if (!preg_match('/((?!(0))^[\d]+)$/i', (string)$value))
+    		throw new \Exception("Error: $value is not valid, value should not start with 0", 1);
     	// Invalid number TODO:  Allow negative numbers
 	}
 
-	private static function validateRange($number, $range)
+	private static function validateRange($value, $range)
 	{
-		if ((int)$number < $range[0] || (int)$number > $range[1])
-			throw new \Exception("Error: The provided value \"$number\" is not in the range of \"$range[0]-$range[1]\".");
+		if ((int)$value < $range[0] || (int)$value > $range[1])
+			throw new \Exception("Error: The provided value \"$value\" is not in the range of \"$range[0]-$range[1]\".");
 	}
 }
