@@ -182,9 +182,8 @@ class ShortenNums
 	}
 
 	/**
-	 * [validateNumber description]
-	 * @param string $value [description]
-	 * @return [type]         [description]
+	 * Validate number
+	 * @param string $value
 	 */
 	private static function validateNumber($value)
 	{
