@@ -11,7 +11,7 @@ class ShortenNumsTest extends TestCase
     public function is_readableNumber()
     {
     	$random = ShortenNumsFacade::readableNumber('2000',3);
-        $this->assertRegExp('/((?!(0))^[\d]{1,3}k$|((?!(0))^[\d]{1,3}\.\d{1,}k$))/i', $random);
+        $this->assertRegExp('/((?!(0))^([\d]{1,3})[kMBT]$|((?!(0))^[\d]{1,3}\.\d{1,}[kMBT]$))/i', $random);
 
         $thousands = ShortenNumsFacade::readableThousand('120300');
         $this->assertRegExp('/((?!(0))^[\d]{1,3}k$|((?!(0))^[\d]{1,3}\.\d{1,}k$))/i', $thousands);

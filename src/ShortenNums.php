@@ -18,11 +18,31 @@ namespace Stonec0der\ShortenNums;
  */
 class ShortenNums
 {
-	private static $thousand_format;
-	private static $million_format;
-	private static $billion_format;
-	private static $trillion_format;
+	//private static $thousand_format;
+	//private static $million_format;
+	//private static $billion_format;
+	//private static $trillion_format;
 	// TODO:  Add method to use $value / 999 for 999-999999 to return 0.9K instead of rounded it to 1K
+    /**
+     * 
+     * @var array Max supported numbers.
+     */
+    private static $tresholds = [
+        'K' => '999999',
+        'M' => '999999999',
+        'B'	=> '999999999999',
+        'T' => '999999999999000',
+    ];
+    /**
+     * 
+     * @var array
+     */
+    private static $formats = [
+        'K'	=> 1000,
+        'M'	=> 1000000,
+        'B'	=> 1000000000,
+        'T' => 1000000000000,
+    ];
 
 	/**
 	 * Convert long number to readable Numbers 1000 => 1K
@@ -33,40 +53,24 @@ class ShortenNums
 	 */
 	public static function formatNumber($value, $precision): string
 	{
-		/**
-    	 * The length of the provided number if length was not set.
-    	 * @var int
-    	 */
-        $number_length = strlen((string)$value);
-
-	    self::validateNumber($value);
-	    
-		switch ($number_length) {
-			case 4:
-			case 5:
-			case 6:
-				$formated_number = self::formatThousand($value, $precision);
+		// $treshold2 = 999; // If you want 0.9k for 999
+		$suffix = '';
+		$clean_number = '';
+		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
+		self::validateNumber($value);
+		foreach(self::$tresholds as $suffix => $treshold) {
+			if ($value < $treshold) {
+				//if (isset(self::$thousand_format))
+				//	$clean_number = $value / self::$thousand_format;
+				$clean_number = $value / self::$formats[$suffix];
+				// Round and format number
+				//die(var_dump($clean_number, $formats[$suffix]));
 				break;
-			case 7:
-			case 8:
-			case 9:
-				$formated_number = self::formatMillion($value, $precision);
-				break;
-			case 10:
-			case 11:
-			case 12:
-				$formated_number = self::formatBillion($value, $precision);
-				break;
-			case 13:
-			case 14:
-			case 15:
-				$formated_number = self::formatTrillion($value, $precision);
-				break;
-			default:
-				$formated_number = self::notSupported($value);
-				break;
+			}
 		}
-		return $formated_number;
+		$formated_number = number_format($clean_number,$precision);
+
+		return (preg_match('/\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
 	}
 
 	/**
@@ -78,7 +82,7 @@ class ShortenNums
 	 */		
 	public static function formatThousand($value, $precision): string
 	{
-		$format = 1000; // If you dont wnat 0.9k but straight 1k for 999
+		//$format = 1000; // If you dont wnat 0.9k but straight 1k for 999
 		// $treshold2 = 999; // If you want 0.9k for 999
 		$range = [999, 999999];
 		$suffix = 'K';
@@ -88,7 +92,7 @@ class ShortenNums
 
 		//if (isset(self::$thousand_format))
 		//	$clean_number = $value / self::$thousand_format;
-		$clean_number = $value / $format;
+		$clean_number = $value / self::$format[$suffix];
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
@@ -103,8 +107,6 @@ class ShortenNums
 	 */
 	public static function formatMillion($value, $precision): string
 	{
-		$format = 1000000; // If you dont wnat 0.9M but straight 1k for 999.999
-		// $treshold2 = 999; // If you want 0.9M for 999999
 		$range = [999999, 999999999];
 		$suffix = 'M';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
@@ -113,7 +115,7 @@ class ShortenNums
 
 		//if (isset(self::$million_format))
 		//	$clean_number = $value / self::$million_format;
-		$clean_number = $value / $format;
+		$clean_number = $value / self::$formats[$suffix];
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
@@ -128,8 +130,6 @@ class ShortenNums
 	 */
 	public static function formatBillion($value, $precision): string
 	{
-		$format = 1000000000;
-		// $treshold2 = 999999999; 
 		$range = [999999999, 999999999999];
 		$suffix = 'B';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
@@ -138,7 +138,7 @@ class ShortenNums
 
 		//if (isset(self::$billion_format))
 		//	$clean_number = $value / self::$billion_format;
-		$clean_number = $value / $format;
+		$clean_number = $value / self::$formats[$suffix];
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
@@ -153,8 +153,6 @@ class ShortenNums
 	 */
 	public static function formatTrillion($value, $precision): string
 	{
-		$format = 1000000000000;
-		// $treshold2 = 999999999999; 
 		$range = [999999999999, 999999999999000];
 		$suffix = 'T';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
@@ -163,7 +161,7 @@ class ShortenNums
 
 		//if (isset(self::$trillion_format))
 		//	$clean_number = $value / self::$trillion_format;
-		$clean_number = $value / $format;
+		$clean_number = $value / self::$formats[$suffix];
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
@@ -176,10 +174,10 @@ class ShortenNums
 	 * @param  string $value the invalid number
 	 * @return string
 	 */
-	private static function notSupported($value): string
-	{
-	    return 'Sorry ' . $value . ' is not Supported!';
-	}
+// 	private static function notSupported($value): string
+// 	{
+// 	    return 'Sorry ' . $value . ' is not Supported!';
+// 	}
 
 	/**
 	 * Validate number
