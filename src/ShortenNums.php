@@ -174,10 +174,10 @@ class ShortenNums
 	 * @param  string $value the invalid number
 	 * @return string
 	 */
-	private static function notSupported($value): string
-	{
-	    return 'Sorry ' . $value . ' is not Supported!';
-	}
+// 	private static function notSupported($value): string
+// 	{
+// 	    return 'Sorry ' . $value . ' is not Supported!';
+// 	}
 
 	/**
 	 * Validate number
