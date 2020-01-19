@@ -58,7 +58,6 @@ class ShortenNums
 		$clean_number = '';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
 		self::validateNumber($value);
-		self::validateRange($value, $range);
 		foreach(self::$tresholds as $suffix => $treshold) {
 			if ($value < $treshold) {
 				//if (isset(self::$thousand_format))
