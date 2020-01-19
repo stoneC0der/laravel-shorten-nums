@@ -18,10 +18,10 @@ namespace Stonec0der\ShortenNums;
  */
 class ShortenNums
 {
-	private $thousand_format;
-	private $million_format;
-	private $billion_format;
-	private $trillion_format;
+	private static $thousand_format;
+	private static $million_format;
+	private static $billion_format;
+	private static $trillion_format;
 	// TODO:  Add method to use $value / 999 for 999-999999 to return 0.9K instead of rounded it to 1K
 
 	/**
@@ -91,8 +91,8 @@ class ShortenNums
 		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		if (isset(self::$thousand_format))
-			$clean_number = $value / self::$thousand_format;
+		//if (isset(self::$thousand_format))
+		//	$clean_number = $value / self::$thousand_format;
 		$clean_number = $value / $format;
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
@@ -116,8 +116,8 @@ class ShortenNums
 		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		if (isset(self::$million_format))
-			$clean_number = $value / self::$million_format;
+		//if (isset(self::$million_format))
+		//	$clean_number = $value / self::$million_format;
 		$clean_number = $value / $format;
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
@@ -141,8 +141,8 @@ class ShortenNums
 		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		if (isset(self::$billion_format))
-			$clean_number = $value / self::$billion_format;
+		//if (isset(self::$billion_format))
+		//	$clean_number = $value / self::$billion_format;
 		$clean_number = $value / $format;
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
@@ -166,8 +166,8 @@ class ShortenNums
 		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		if (isset(self::$trillion_format))
-			$clean_number = $value / self::$trillion_format;
+		//if (isset(self::$trillion_format))
+		//	$clean_number = $value / self::$trillion_format;
 		$clean_number = $value / $format;
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
