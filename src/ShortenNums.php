@@ -102,7 +102,7 @@ class ShortenNums
 
 	/**
 	 * Convert 1,000,000 place to 1M
-	 * @param  int/string $number
+	 * @param  string $number
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1M-1.5M
 	 */
@@ -127,7 +127,7 @@ class ShortenNums
 
 	/**
 	 * Convert 1000,000,000 place to 1B
-	 * @param  int/string $number
+	 * @param  string $number
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1B-1.5B
 	 */
@@ -152,7 +152,7 @@ class ShortenNums
 
 	/**
 	 * Convert 1,000,000,000,000 place to 1T
-	 * @param  int/string $number
+	 * @param  string $number
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1B-1.5B
 	 */
