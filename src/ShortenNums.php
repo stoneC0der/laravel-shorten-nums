@@ -39,11 +39,6 @@ class ShortenNums
     	 */
         $number_length = strlen((string)$value);
 
-        /**
-	     * @var string $formated_number The formated_number value.
-	     */
-	    $formated_number;
-
 	    self::validateNumber($value);
 	    
 		switch ($number_length) {
@@ -77,7 +72,7 @@ class ShortenNums
 	/**
 	 * Convert 1000 => 1K, 10000 => 10K & 1000000 => 100K
 	 * 
-	 * @param  int/string $number
+	 * @param  string $value
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1K-1.5K
 	 */		
@@ -102,7 +97,7 @@ class ShortenNums
 
 	/**
 	 * Convert 1,000,000 place to 1M
-	 * @param  string $number
+	 * @param  string $value
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1M-1.5M
 	 */
@@ -127,7 +122,7 @@ class ShortenNums
 
 	/**
 	 * Convert 1000,000,000 place to 1B
-	 * @param  string $number
+	 * @param  string $value
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1B-1.5B
 	 */
@@ -152,7 +147,7 @@ class ShortenNums
 
 	/**
 	 * Convert 1,000,000,000,000 place to 1T
-	 * @param  string $number
+	 * @param  string $value
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1B-1.5B
 	 */
@@ -178,7 +173,7 @@ class ShortenNums
 
 	/**
 	 * The Current value is not yet suppoerted, typically it greater than the supported values
-	 * @param  string $number the invalid number
+	 * @param  string $value the invalid number
 	 * @return string
 	 */
 	private static function notSupported($number): string
@@ -188,7 +183,7 @@ class ShortenNums
 
 	/**
 	 * [validateNumber description]
-	 * @param  [type] $number [description]
+	 * @param  [type] $value [description]
 	 * @return [type]         [description]
 	 */
 	private static function validateNumber($number)
