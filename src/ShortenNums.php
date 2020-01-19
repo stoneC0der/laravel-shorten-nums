@@ -92,7 +92,7 @@ class ShortenNums
 
 		//if (isset(self::$thousand_format))
 		//	$clean_number = $value / self::$thousand_format;
-		$clean_number = $value / self::$format[$suffix];
+		$clean_number = $value / self::$formats[$suffix];
 		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
