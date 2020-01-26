@@ -18,10 +18,6 @@ namespace Stonec0der\ShortenNums;
  */
 class ShortenNums
 {
-	//private static $thousand_format;
-	//private static $million_format;
-	//private static $billion_format;
-	//private static $trillion_format;
 	// TODO:  Add method to use $value / 999 for 999-999999 to return 0.9K instead of rounded it to 1K
     /**
      * 
@@ -53,18 +49,14 @@ class ShortenNums
 	 */
 	public static function formatNumber($value, $precision): string
 	{
-		// $treshold2 = 999; // If you want 0.9k for 999
-		$suffix = '';
 		$clean_number = '';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
-		self::validateNumber($value);
+		if (self::isNotValid($value))
+			return self::notSupported($value);
+
 		foreach(self::$tresholds as $suffix => $treshold) {
 			if ($value < $treshold) {
-				//if (isset(self::$thousand_format))
-				//	$clean_number = $value / self::$thousand_format;
 				$clean_number = $value / self::$formats[$suffix];
-				// Round and format number
-				//die(var_dump($clean_number, $formats[$suffix]));
 				break;
 			}
 		}
@@ -82,18 +74,12 @@ class ShortenNums
 	 */		
 	public static function formatThousand($value, $precision): string
 	{
-		//$format = 1000; // If you dont wnat 0.9k but straight 1k for 999
-		// $treshold2 = 999; // If you want 0.9k for 999
 		$range = [999, 999999];
 		$suffix = 'K';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
-		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		//if (isset(self::$thousand_format))
-		//	$clean_number = $value / self::$thousand_format;
 		$clean_number = $value / self::$formats[$suffix];
-		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
@@ -110,13 +96,9 @@ class ShortenNums
 		$range = [999999, 999999999];
 		$suffix = 'M';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
-		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		//if (isset(self::$million_format))
-		//	$clean_number = $value / self::$million_format;
 		$clean_number = $value / self::$formats[$suffix];
-		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
@@ -133,13 +115,9 @@ class ShortenNums
 		$range = [999999999, 999999999999];
 		$suffix = 'B';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
-		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		//if (isset(self::$billion_format))
-		//	$clean_number = $value / self::$billion_format;
 		$clean_number = $value / self::$formats[$suffix];
-		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;  
@@ -156,13 +134,9 @@ class ShortenNums
 		$range = [999999999999, 999999999999000];
 		$suffix = 'T';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
-		self::validateNumber($value);
 		self::validateRange($value, $range);
 
-		//if (isset(self::$trillion_format))
-		//	$clean_number = $value / self::$trillion_format;
 		$clean_number = $value / self::$formats[$suffix];
-		// Round and format number
 		$formated_number = number_format($clean_number,$precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix; 
@@ -174,31 +148,43 @@ class ShortenNums
 	 * @param  string $value the invalid number
 	 * @return string
 	 */
-// 	private static function notSupported($value): string
-// 	{
-// 	    return 'Sorry ' . $value . ' is not Supported!';
-// 	}
+	private static function notSupported($value): string
+	{
+		if ($value < 999) {
+			return $value;
+		}
+		else{
+			return '999+T';
+		}
+	}
 
 	/**
 	 * Validate number
 	 * @param string $value
 	 */
-	private static function validateNumber($value)
+	private static function isNotValid($value)
 	{
-		// Tis temporary enforce that the pass value should be pass as string of an integer instead non quoted integer example: '1000' is valid, 1000 is not.
-		if (!is_string($value))
-			throw new \Exception("TypeError: $value should be pass as quoted string to avoid unespected result.", 1);
 		// Accept only integers and string with valid integers.
     	if (!is_int((int)$value))
     		throw new \Exception("TypeError: $value is not a valid integer", 1);
     	// Should not start with 0. Also check the number length
     	if (!preg_match('/((?!(0))^[\d]+)$/i', (string)$value))
     		throw new \Exception("Error: $value is not valid, value should not start with 0", 1);
-    	// Invalid number TODO:  Allow negative numbers
+		//  TODO:  Allow negative numbers
+		if (($value < 999) || ($value > 999999999999000)) {
+			return true;
+		}
+		return false;
 	}
 
 	private static function validateRange($value, $range)
 	{
+		// Accept only integers and string with valid integers.
+		if (!is_int((int)$value))
+			throw new \Exception("TypeError: $value is not a valid integer", 1);
+		// Should not start with 0. Also check the number length
+		if (!preg_match('/((?!(0))^[\d]+)$/i', (string)$value))
+			throw new \Exception("Error: $value is not valid, value should not start with 0", 1);
 		if ((int)$value < $range[0] || (int)$value > $range[1])
 			throw new \Exception("Error: The provided value \"$value\" is not in the range of \"$range[0]-$range[1]\".");
 	}
