@@ -43,7 +43,7 @@ class ShortenNums
 	/**
 	 * Convert long number to readable Numbers 1000 => 1K
 	 * 
-	 * @param string $value This should be pass as a string for now.
+	 * @param int|string $value This should be pass as a string for now.
 	 * @param int $precision Number of number after decimal point.
 	 * @return string
 	 */
@@ -68,7 +68,7 @@ class ShortenNums
 	/**
 	 * Convert 1000 => 1K, 10000 => 10K & 1000000 => 100K
 	 * 
-	 * @param  string $value
+	 * @param  int|string $value
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1K-1.5K
 	 */		
@@ -87,9 +87,8 @@ class ShortenNums
 
 	/**
 	 * Convert 1,000,000 place to 1M
-	 * @param  string $value
+	 * @param  int|string $value
 	 * @param int $precision Number of number after decimal point.
-	 * @return string 	A string number formated as 1M-1.5M
 	 */
 	public static function formatMillion($value, $precision): string
 	{
@@ -106,9 +105,8 @@ class ShortenNums
 
 	/**
 	 * Convert 1000,000,000 place to 1B
-	 * @param  string $value
+	 * @param  int|string $value
 	 * @param int $precision Number of number after decimal point.
-	 * @return string 	A string number formated as 1B-1.5B
 	 */
 	public static function formatBillion($value, $precision): string
 	{
@@ -125,9 +123,8 @@ class ShortenNums
 
 	/**
 	 * Convert 1,000,000,000,000 place to 1T
-	 * @param  string $value
+	 * @param  int|string $value
 	 * @param int $precision Number of number after decimal point.
-	 * @return string 	A string number formated as 1B-1.5B
 	 */
 	public static function formatTrillion($value, $precision): string
 	{
@@ -145,8 +142,7 @@ class ShortenNums
 
 	/**
 	 * The Current value is not yet suppoerted, typically it greater than the supported values
-	 * @param  string $value the invalid number
-	 * @return string
+	 * @param  int|string $value the invalid number
 	 */
 	private static function notSupported($value): string
 	{
@@ -160,7 +156,7 @@ class ShortenNums
 
 	/**
 	 * Validate number
-	 * @param string $value
+	 * @param int|string $value
 	 */
 	private static function isNotValid($value)
 	{
@@ -177,6 +173,10 @@ class ShortenNums
 		return false;
 	}
 
+	/**
+	 * @param int|string $value
+	 * @param mixed $range
+	 */
 	private static function validateRange($value, $range)
 	{
 		// Accept only integers and string with valid integers.
