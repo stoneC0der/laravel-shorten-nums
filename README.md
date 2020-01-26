@@ -55,7 +55,7 @@ $formated_number = ShortenNumsFacade::readableNumber($value, $precision=2);
 // 1.24K
 ```
 
-If you know in advance the length of the value, let's you expect the value to be between 999,999 & 999,999,999.
+If you expect the value to be between 999,999 & 999,999,999.
 You can directly call a method associated with Millions
 
 ```php
@@ -65,8 +65,7 @@ $formated_number = ShortenNumsFacade::readableMillion($value, 2);
 // Output
 // 8.53M
 ```
-
-In most case you will want to use ```ShortenNumsFacade::readableNumer($number);```
+In most case you will want to use ```ShortenNumsFacade::readableNumer($number);```. If a value less than 999 is passed the value is return as it, if it greater than 999 Trillions return ```// 999+T```
 
 ### Testing
 
