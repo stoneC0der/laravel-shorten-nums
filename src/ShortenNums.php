@@ -53,7 +53,7 @@ class ShortenNums
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
 		if (self::isNotValid($value))
 			return self::notSupported($value);
-
+		$suffix = '';
 		foreach(self::$tresholds as $suffix => $treshold) {
 			if ($value < $treshold) {
 				$clean_number = $value / self::$formats[$suffix];
@@ -175,7 +175,7 @@ class ShortenNums
 
 	/**
 	 * @param int|string $value
-	 * @param mixed $range
+	 * @param array $range
 	 */
 	private static function validateRange($value, $range)
 	{
