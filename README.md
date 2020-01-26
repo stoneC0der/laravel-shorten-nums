@@ -65,6 +65,7 @@ $formated_number = ShortenNumsFacade::readableMillion($value, 2);
 // Output
 // 8.53M
 ```
+
 In most case you will want to use ```ShortenNumsFacade::readableNumer($number);```. If a value less than 999 is passed the value is return as it, if it greater than 999 Trillions return ```// 999+T```
 
 ### Testing
