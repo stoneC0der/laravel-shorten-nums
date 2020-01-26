@@ -161,11 +161,8 @@ class ShortenNums
 	private static function isNotValid($value)
 	{
 		// Accept only integers and string with valid integers.
-    	if (!is_int((int)$value))
+    	if (!is_int((int)$value) || !preg_match('/((?!(0))^[\d]+)$/i', (string)$value))
     		throw new \Exception("TypeError: $value is not a valid integer", 1);
-    	// Should not start with 0. Also check the number length
-    	if (!preg_match('/((?!(0))^[\d]+)$/i', (string)$value))
-    		throw new \Exception("Error: $value is not valid, value should not start with 0", 1);
 		//  TODO:  Allow negative numbers
 		if (($value < 999) || ($value > 999999999999000)) {
 			return true;
