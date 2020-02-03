@@ -2,6 +2,11 @@
 
 All notable changes to `shorten-nums` will be documented in this file
 
+## 10.0.3
+
+- Fixed bug where an invalid format is return when precision is greater than 1
+- Added 0 as valid number
+
 ## 1.0.2 - 2020-01-26
 
 - Added default for invalid inputs
