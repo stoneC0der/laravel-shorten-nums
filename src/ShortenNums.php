@@ -27,7 +27,7 @@ class ShortenNums
         'K' => '999999',
         'M' => '999999999',
         'B'	=> '999999999999',
-        'T' => '999999999999000',
+        'T' => '999899999999930',
     ];
     /**
      * 
@@ -128,7 +128,7 @@ class ShortenNums
 	 */
 	public static function formatTrillion($value, $precision): string
 	{
-		$range = [999999999999, 999999999999000];
+		$range = [999999999999, 999899999999930];
 		$suffix = 'T';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
 		self::validateRange($value, $range);
