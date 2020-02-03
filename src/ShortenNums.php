@@ -164,7 +164,7 @@ class ShortenNums
     	if (!is_int((int)$value) || !preg_match('/((?!(0\d))^[\d]+)$/i', (string)$value))
     		throw new \Exception("TypeError: $value is not a valid integer", 1);
 		//  TODO:  Allow negative numbers
-		if (($value < 999) || ($value > 999999999999000)) {
+		if (($value < 999) || ($value >= 999899999999930)) {
 			return true;
 		}
 		return false;
@@ -182,7 +182,7 @@ class ShortenNums
 		// Should not start with 0. Also check the number length
 		if (!preg_match('/((?!(0\d))^[\d]+)$/i', (string)$value))
 			throw new \Exception("Error: $value is not valid, value should not start with 0", 1);
-		if ((int)$value < $range[0] || (int)$value > $range[1])
+		if ((int)$value < $range[0] || (int)$value >= $range[1])
 			throw new \Exception("Error: The provided value \"$value\" is not in the range of \"$range[0]-$range[1]\".");
 	}
 }
