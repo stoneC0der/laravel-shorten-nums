@@ -62,7 +62,7 @@ class ShortenNums
 		}
 		$formated_number = number_format($clean_number,$precision);
 
-		return (preg_match('/\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
+		return (preg_match('/\d\.0{1,}$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
 	}
 
 	/**
