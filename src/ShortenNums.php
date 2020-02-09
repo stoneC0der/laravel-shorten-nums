@@ -47,7 +47,7 @@ class ShortenNums
 	 * @param int $precision Number of number after decimal point.
 	 * @return string
 	 */
-	public static function formatNumber($value, $precision): string
+	public static function readableNumber($value, $precision = 1): string
 	{
 		$clean_number = '';
 		// Check if value is a valid integer and does not start with 0, and force user to pass value as string
@@ -60,7 +60,7 @@ class ShortenNums
 				break;
 			}
 		}
-		$formated_number = number_format($clean_number,$precision);
+		$formated_number = number_format($clean_number, config('shorten-nums.precision') ?? $precision);
 
 		return (preg_match('/\d\.0{1,}$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
 	}
@@ -72,7 +72,7 @@ class ShortenNums
 	 * @param int $precision Number of number after decimal point.
 	 * @return string 	A string number formated as 1K-1.5K
 	 */		
-	public static function formatThousand($value, $precision): string
+	public static function readableThousand($value, $precision = 1): string
 	{
 		$range = [999, 999999];
 		$suffix = 'K';
@@ -80,7 +80,7 @@ class ShortenNums
 		self::validateRange($value, $range);
 
 		$clean_number = $value / self::$formats[$suffix];
-		$formated_number = number_format($clean_number,$precision);
+		$formated_number = number_format($clean_number, config('shorten-nums.precision') ?? $precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
 	}
@@ -90,7 +90,7 @@ class ShortenNums
 	 * @param  int|string $value
 	 * @param int $precision Number of number after decimal point.
 	 */
-	public static function formatMillion($value, $precision): string
+	public static function readableMillion($value, $precision = 1): string
 	{
 		$range = [999999, 999999999];
 		$suffix = 'M';
@@ -98,7 +98,7 @@ class ShortenNums
 		self::validateRange($value, $range);
 
 		$clean_number = $value / self::$formats[$suffix];
-		$formated_number = number_format($clean_number,$precision);
+		$formated_number = number_format($clean_number, config('shorten-nums.precision') ?? $precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;
 	}
@@ -108,7 +108,7 @@ class ShortenNums
 	 * @param  int|string $value
 	 * @param int $precision Number of number after decimal point.
 	 */
-	public static function formatBillion($value, $precision): string
+	public static function readableBillion($value, $precision = 1): string
 	{
 		$range = [999999999, 999999999999];
 		$suffix = 'B';
@@ -116,7 +116,7 @@ class ShortenNums
 		self::validateRange($value, $range);
 
 		$clean_number = $value / self::$formats[$suffix];
-		$formated_number = number_format($clean_number,$precision);
+		$formated_number = number_format($clean_number, config('shorten-nums.precision') ?? $precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix;  
 	}
@@ -126,7 +126,7 @@ class ShortenNums
 	 * @param  int|string $value
 	 * @param int $precision Number of number after decimal point.
 	 */
-	public static function formatTrillion($value, $precision): string
+	public static function readableTrillion($value, $precision = 1): string
 	{
 		$range = [999999999999, 999899999999930];
 		$suffix = 'T';
@@ -134,7 +134,7 @@ class ShortenNums
 		self::validateRange($value, $range);
 
 		$clean_number = $value / self::$formats[$suffix];
-		$formated_number = number_format($clean_number,$precision);
+		$formated_number = number_format($clean_number, config('shorten-nums.precision') ?? $precision);
 
 		return (preg_match('/\\d\.0$/', $formated_number)) ? rtrim(rtrim($formated_number,'0'), '.').$suffix : $formated_number.$suffix; 
 	}
