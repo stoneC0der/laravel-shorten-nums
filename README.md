@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/stonec0der/shorten-nums.svg?style=flat-square)](https://packagist.org/packages/stonec0der/shorten-nums)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is simple package to convert 12894090 views to 12.9M views. I wrote this as I need this functionality and did not want to use a library, i am sure there is a much better one out there but if you want something simple feel free to use.
+This is simple package to convert 12894090 views to 12.9M views. Feel free to use.
 
 ## Installation
 
@@ -22,7 +22,12 @@ Or via composer:
 ```bash
 composer require stonec0der/shorten-nums
 ```
+Publish the configuration file with
+```bash
+php artisant vendor:publish --provider="Stonec0der\ShortenNums\ShortenNumsServiceProvider"
+```
 
+This will publish a config file shorten-nums.php in the config folder. Set your default precision 
 ## Usage
 
 Let's say you have a big integer value being return like 12894090 (views) and you want to display it like this 12.8M (views).
@@ -40,7 +45,7 @@ $formated_number = ShortenNumsFacade::readableNumber($value);
 // 12.9M.
 ```
 
-The shortenNumber accept an option parameter length which is the length of value passed.
+If you do not need the config file you can directly pass the precision when calling any method, else the default will be use
 
 ```php
 /*
@@ -49,9 +54,9 @@ This enable you to return for 1240 => 1.2K with default precisionn
 and 1.24 with $precision set to 2 and so on.
 */
 $value = '1240';
-$precision = 1;
+$precision = 2;
 
-$formated_number = ShortenNumsFacade::readableNumber($value, $precision=2);
+$formated_number = ShortenNumsFacade::readableNumber($value, $precision);
 // Output
 // 1.24K
 ```
