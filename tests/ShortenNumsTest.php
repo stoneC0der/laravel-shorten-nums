@@ -2,16 +2,57 @@
 
 namespace Stonec0der\ShortenNums\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Orchestra\Testbench\TestCase;
 use Stonec0der\ShortenNums\ShortenNumsFacade;
 
 class ShortenNumsTest extends TestCase
 {
+    /**
+     * Setup the test environment.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('vendor:publish', ['--tag' => 'config']);
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('shorten-nums.precision', 2);
+    }
+
+    /**
+     * Get package providers.  At a minimum this is the package being tested, but also
+     * would include packages upon which our package depends, e.g. Cartalyst/Sentry
+     * In a normal app environment these would be added to the 'providers' array in
+     * the config/app.php file.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
+    protected function getPackageProviders($app)
+    {
+        return [
+            'Stonec0der\ShortenNums\ShortenNumsServiceProvider',
+        ];
+    }
+
     /** @test */
     public function it_can_shortent_any_valid_number()
     {
-    	$random = ShortenNumsFacade::readableNumber('0',3);
+        // ShortenNumsFacade::shouldReceive('shorten-nums');
+    	$random = ShortenNumsFacade::readableNumber('1200',3);
         $this->assertRegExp('/((?!(0\d))^([\d]{1,3})[kMBT]$|((?!(0\d))^[\d]{1,3}\.\d{1,}[kMBT]|((?!(0\d))^[\d]{1,3}|(?!(0\d))^[\d]{3}\+T$)))/i', $random);
+        echo $random;
     }
 
     /** @test */
